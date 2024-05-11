@@ -1,0 +1,33 @@
+:root {
+  --modified-color: #dd5757;
+  --modifiedbase-color: #6bdd57;
+  --modified-size: 15px;
+  --modified-right: 10px;
+  --modified-bottom: 10px;
+  --stack-top: 10px;
+  --stack-left: 5px;
+}
+
+.Flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+  overflow: hidden;
+  position: relative;
+}
+
+.edgeInfo {
+  position: absolute;
+  color: #dd5757;
+  bottom: 8px;
+  right: 30px;
+  /* user  unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

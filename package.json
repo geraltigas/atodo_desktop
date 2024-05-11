@@ -1,0 +1,51 @@
+{
+  "name": "atodo",
+  "version": "1.0.0",
+  "description": "Advanced Todo List",
+  "main": "./out/main/index.js",
+  "author": "example.com",
+  "homepage": "https://geraltigas.github.io",
+  "scripts": {
+    "format": "prettier --write .",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
+    "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
+    "typecheck": "npm run typecheck:node && npm run typecheck:web",
+    "start": "electron-vite preview",
+    "dev": "electron-vite dev",
+    "build": "npm run typecheck && electron-vite build",
+    "postinstall": "electron-builder install-app-deps",
+    "build:win": "npm run build && electron-builder --win --config",
+    "build:mac": "electron-vite build && electron-builder --mac --config",
+    "build:linux": "electron-vite build && electron-builder --linux --config"
+  },
+  "dependencies": {
+    "@electron-toolkit/preload": "^3.0.0",
+    "@electron-toolkit/utils": "^3.0.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "^5.14.18",
+    "@mui/material": "^5.14.18",
+    "@mui/x-date-pickers": "^7.4.0",
+    "@preact/signals": "^1.2.2",
+    "axios": "^1.6.8",
+    "dayjs": "^1.11.11",
+    "electron-updater": "^6.1.7",
+    "preact": "^10.19.3",
+    "reactflow": "^11.10.1"
+  },
+  "devDependencies": {
+    "@electron-toolkit/eslint-config-prettier": "^2.0.0",
+    "@electron-toolkit/eslint-config-ts": "^1.0.1",
+    "@electron-toolkit/tsconfig": "^1.0.1",
+    "@preact/preset-vite": "^2.7.0",
+    "@types/node": "^18.19.5",
+    "electron": "^28.1.1",
+    "electron-builder": "^24.9.1",
+    "electron-vite": "^2.0.0",
+    "prettier": "^3.1.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11",
+    "vite-plugin-remove-console": "^2.2.0"
+  }
+}

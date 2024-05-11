@@ -1,0 +1,16 @@
+/*noinspection CssUnusedSymbol*/
+.modifiedBase {
+  position: absolute;
+  background: var(--modifiedbase-color);
+  bottom: var(--modified-bottom);
+  right: var(--modified-right);
+  width: var(--modified-size);
+  height: var(--modified-size);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/*noinspection CssUnusedSymbol*/
+.modified {
+  background: var(--modified-color);
+}
