@@ -1,5 +1,6 @@
 import styles from './Loading.module.css'
 import { HeadBar } from '../../components/HeadBar/HeadBar'
+import { AlertBar } from '../../components/AlertBar/AlertBar'
 
 export const Loading = () => {
 
@@ -17,6 +18,7 @@ export const Loading = () => {
         <div className={styles.sk_cube8 + ' ' + styles.sk_cube}></div>
         <div className={styles.sk_cube9 + ' ' + styles.sk_cube}></div>
       </div>
+      <AlertBar />
     </div>
   )
 }

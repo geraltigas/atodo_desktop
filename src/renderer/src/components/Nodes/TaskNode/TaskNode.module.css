@@ -2,7 +2,7 @@
   --task-node-handle-size: 10px;
   --task-node-size-height: 30px;
   --task-node-size-width: 40px;
-  --task-node-padding: 7px;
+  --task-node-padding: 8px;
   --start-border-radius: 5px;
   --task-node-background-color-created: #555555;
   --task-node-background-color-done: #35732e;
@@ -20,7 +20,8 @@
   border-radius: var(--start-border-radius);
   min-width: var(--task-node-size-width);
   min-height: var(--task-node-size-height);
-  padding: var(--task-node-padding);
+  padding-left: var(--task-node-padding);
+  padding-right: var(--task-node-padding);
   /*border: 1px solid black;*/
   /*position: absolute;*/
   /*z-index: 1;*/

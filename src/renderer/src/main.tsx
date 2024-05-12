@@ -6,6 +6,7 @@ import {
   create_database,
   get_database_file_path
 } from './api/database_api'
+import { window_control_api } from './api/window_control_api'
 
 const init_database = async () => {
   const db_existence = await check_database_existence()
@@ -21,4 +22,7 @@ const init_database = async () => {
 
 init_database().then((_r) => {
   render(<App />, document.getElementById('root')!)
+}).catch((_err) => {
+  window_control_api.show_notification("Unable to connect to the service", "Please check service status and try again.")
+  window_control_api.set_close()
 })

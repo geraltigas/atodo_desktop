@@ -147,7 +147,7 @@ export const update_show_graph_with_show_data = (show_data: show_data) => {
       position: {
         // if NaN then set to 0
         x: isNaN(max_x) ? 100 : (max_x + 100),
-        y: isNaN(avg_y) ? 0 : avg_y + 10
+        y: isNaN(avg_y) ? 0 : avg_y
       },
     })
     _show_nodes.push(start_node)
