@@ -1,0 +1,42 @@
+.taskSidebar {
+  width: 100%;
+  max-width: 360px;
+  background-color: #f0f0f0;
+}
+
+.sectionHeader {
+  margin-top: 16px;
+  font-size: 1.25rem; /* Corresponds to h6 */
+  font-weight: bold;
+  padding: 0 4px;
+}
+
+.taskItem {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.taskItem:hover {
+  background-color: #e8e8e8;
+}
+
+.selectedTaskItem {
+  background-color: #e0e0e0;
+}
+
+.doing {
+  color: white;
+  background-color: green;
+  padding: 1px 2px;
+  border-radius: 2px;
+}
+
+.offWork {
+  color: green;
+}
+
+.workTime {
+  color: red;
+}

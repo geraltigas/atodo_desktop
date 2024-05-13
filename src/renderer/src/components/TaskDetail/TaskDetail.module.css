@@ -1,0 +1,31 @@
+:root {
+  --task-detail-background: #f0f0f0;
+  --task-detail-padding: 20px;
+  --task-detail-width: 80vw;
+  --task-detail-min-width: 500px;
+  --task-detail-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  --task-detail-h2-font-size: 1.5em;
+  --task-detail-p-font-size: 1em;
+  --task-detail-p-color: #666;
+  --task-detail-p-margin-bottom: 5px;
+  --task-detail-h2-margin-bottom: 10px;
+}
+
+.TaskDetail {
+  padding: var(--task-detail-padding);
+  width: var(--task-detail-width);
+  min-width: var(--task-detail-min-width);
+  background-color: var(--task-detail-background);
+  box-shadow: var(--task-detail-box-shadow);
+}
+
+.TaskDetail h2 {
+  font-size: var(--task-detail-h2-font-size);
+  margin-bottom: var(--task-detail-h2-margin-bottom);
+}
+
+.TaskDetail p {
+  font-size: var(--task-detail-p-font-size);
+  color: var(--task-detail-p-color);
+  margin-bottom: var(--task-detail-p-margin-bottom);
+}

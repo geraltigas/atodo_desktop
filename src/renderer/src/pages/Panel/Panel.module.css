@@ -1,0 +1,12 @@
+.PanelPage {
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+}
+
+.Panel {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+}

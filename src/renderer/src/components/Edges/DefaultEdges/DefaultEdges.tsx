@@ -1,5 +1,5 @@
 import { BaseEdge, getStraightPath } from 'reactflow'
-import { Edge, now_selected } from '../../GraphShow/ShowGraph'
+import { Edge, now_selected } from '../../ShowGraph/ShowGraph'
 
 export default function DefaultEdges({ id, sourceX, sourceY, targetX, targetY }) {
   const [edgePath] = getStraightPath({

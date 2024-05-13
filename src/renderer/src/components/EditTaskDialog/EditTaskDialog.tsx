@@ -17,7 +17,7 @@ import {
 } from '@mui/material'
 import { ChangeEvent } from 'react'
 import { Signal } from '@preact/signals'
-import { is_inputting } from '../../pages/AToDo/ATodo'
+import { is_inputting } from '../../pages/ATodo/ATodo'
 
 export interface Task {
   id: string;
@@ -89,7 +89,7 @@ export const form_data: Signal<Task> = new Signal<Task>({
 export const EditTaskDialog = ({ open, onClose, onSubmit }: EditTaskDialogProps) => {
 
   is_inputting.value = open;
-  console.log('EditTaskDialog rendered')
+  // console.log('EditTaskDialog rendered')
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -156,13 +156,10 @@ export const EditTaskDialog = ({ open, onClose, onSubmit }: EditTaskDialogProps)
     form_data.value = { ...form_data.value, after_effect: updatedAfterEffects }
   };
 
-  const handleSuspendedTaskTypeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value as SuspendedTaskType;
-    const updatedSuspendedTaskTypes = form_data.value.suspended_task_type.includes(value)
-      ? form_data.value.suspended_task_type.filter(type => type !== value)
-      : [...form_data.value.suspended_task_type, value];
-    form_data.value = { ...form_data.value, suspended_task_type: updatedSuspendedTaskTypes }
-  };
+const handleSuspendedTaskTypeChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const value = e.target.value as SuspendedTaskType;
+  form_data.value = { ...form_data.value, suspended_task_type: [value] }
+};
 
   const handleSubmit = () => {
     const formattedData = {
@@ -236,7 +233,6 @@ export const EditTaskDialog = ({ open, onClose, onSubmit }: EditTaskDialogProps)
               {[
                 { label: 'To Do', value: TaskStatus.todo },
                 { label: 'In Progress', value: TaskStatus.in_progress },
-                { label: 'Paused', value: TaskStatus.paused },
                 { label: 'Suspended', value: TaskStatus.suspended },
                 { label: 'Done', value: TaskStatus.done }
               ].map(status => (
@@ -252,7 +248,11 @@ export const EditTaskDialog = ({ open, onClose, onSubmit }: EditTaskDialogProps)
           {form_data.value.status === TaskStatus.suspended && (
             <FormControl component="fieldset">
               <FormLabel component="legend">Suspended Task Type</FormLabel>
-              <FormGroup>
+              <RadioGroup
+                name="suspended_task_type"
+                value={form_data.value.suspended_task_type[0] || ''}
+                onChange={handleSuspendedTaskTypeChange}
+              >
                 {[
                   { label: 'Time', value: SuspendedTaskType.time },
                   { label: 'Email', value: SuspendedTaskType.email },
@@ -260,17 +260,12 @@ export const EditTaskDialog = ({ open, onClose, onSubmit }: EditTaskDialogProps)
                 ].map(type => (
                   <FormControlLabel
                     key={type.value}
-                    control={
-                      <Checkbox
-                        checked={form_data.value.suspended_task_type.includes(type.value)}
-                        onChange={handleSuspendedTaskTypeChange}
-                        value={type.value.toString()}
-                      />
-                    }
+                    control={<Radio />}
+                    value={type.value.toString()}
                     label={type.label}
                   />
                 ))}
-              </FormGroup>
+              </RadioGroup>
             </FormControl>
           )}
           {form_data.value.suspended_task_type.includes(SuspendedTaskType.time) && (

@@ -1,5 +1,5 @@
 import { applyNodeChanges, Background, BackgroundVariant, Controls, Position, ReactFlow } from 'reactflow'
-import { useOnConnect, useOnEdgeClick, useOnNodeClick } from '../../events/use_event_atodo'
+import { useOnConnect, useOnEdgeClick, useOnNodeClick } from '../../events/atodo_events'
 import { useEffect } from 'preact/compat'
 import StartNode from '../Nodes/StartNode/StartNode'
 import EndNode from '../Nodes/EndNode/EndNode'
@@ -192,7 +192,6 @@ export const update_show_graph_with_show_data = (show_data: show_data) => {
 export const  init_show_graph_data = async () => {
   return get_show_data().then((res) => {
     update_show_graph_with_show_data(res)
-    console.log(res)
   })
 }
 
@@ -202,8 +201,6 @@ export const ShowGraph = () => {
   let onConnect = useOnConnect()
   let onNodeClick = useOnNodeClick()
   let onEdgeClick = useOnEdgeClick()
-
-  // console.log('GraphShow rendered')
 
   useEffect(() => {
     return () => {}

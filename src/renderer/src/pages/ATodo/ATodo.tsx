@@ -1,6 +1,6 @@
-import styles from './AToDo.module.css'
+import styles from './ATodo.module.css'
 import Flow, { init_flow_data } from '../../components/Flow/Flow'
-import useDocumentEvent from '../../events/use_event_atodo'
+import useDocumentEvent from '../../events/atodo_events'
 import { signal, Signal } from '@preact/signals'
 import { timestamp } from '../../../../types/sql'
 
@@ -19,10 +19,21 @@ export default function ATodo() {
 
   console.log('ATodo rendered')
 
+  // const onMouseEnter = useCallback(() => {
+  //   entered_reactflow.value = true
+  // }, [])
+  //
+  // const onMouseLeave = useCallback(() => {
+  //   entered_reactflow.value = false
+  // }, [])
+
   // const nowSelected = useAtomValue(nowSelectedAtom)
 
   return (
-    <div className={styles.Window}>
+    <div className={styles.Window}
+         // onMouseEnter={onMouseEnter}
+         // onMouseLeave={onMouseLeave}
+    >
       <div className={styles.AToDo}>
         {/*<FatherNodeBoard />*/}
         <Flow />

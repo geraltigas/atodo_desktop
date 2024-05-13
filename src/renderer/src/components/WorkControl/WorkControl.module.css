@@ -1,0 +1,40 @@
+.workControl {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background-color: #f5f5f5; /* 背景颜色 */
+  border: 1px solid #ccc; /* 边框 */
+  border-radius: 10px; /* 圆角 */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  width: 320px;
+}
+
+.timer {
+  font-size: 20px; /* Increase font size */
+  font-weight: bold;
+  font-family: Arial, sans-serif; /* Change font family */
+  margin-right: 10px;
+  margin-top: 2px;
+  line-height: 19px;
+  display: flex;
+  align-items: center; /* Vertically center the text */
+}
+
+.dayButton {
+  background-color: rgba(255, 0, 0, 0.5) !important; /* Make the button red */
+  color: white; /* Make the text white */
+  border-radius: 50%; /* Make the button round */
+  display: flex; /* Center the icon */
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px!important;
+}
+
+.dayButton svg {
+  fill: white;
+}

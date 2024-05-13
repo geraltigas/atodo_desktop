@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { ChangeEvent } from 'react';
 import { signal, Signal } from '@preact/signals'
-import { is_inputting } from '../../pages/AToDo/ATodo'
+import { is_inputting } from '../../pages/ATodo/ATodo'
 
 export interface CreateTaskFormData {
   name: string;

@@ -1,6 +1,6 @@
 import { Handle, Position } from 'reactflow'
 import styles from './TaskNode.module.css'
-import { now_selected, Node } from '../../GraphShow/ShowGraph'
+import { now_selected, Node } from '../../ShowGraph/ShowGraph'
 
 const TaskNode = ({ data }) => {
   const classNames = [styles.TaskNode]
