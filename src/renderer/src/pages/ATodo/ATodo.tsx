@@ -1,8 +1,7 @@
 import styles from './ATodo.module.css'
 import Flow, { init_flow_data } from '../../components/Flow/Flow'
-import useDocumentEvent from '../../events/atodo_events'
 import { signal, Signal } from '@preact/signals'
-import { timestamp } from '../../../../types/sql'
+import atodo_events from '../../events/atodo_events'
 
 export const init_atodo_data = () => {
   init_flow_data()
@@ -11,13 +10,10 @@ export const init_atodo_data = () => {
 const is_inputting_init: boolean = false
 export const is_inputting: Signal<boolean> = signal<boolean>(is_inputting_init)
 
-const now_viewing_task_init: timestamp = 0
-export const now_viewing_task: Signal<timestamp> = signal<timestamp>(now_viewing_task_init)
-
 export default function ATodo() {
-  useDocumentEvent()
+  atodo_events()
 
-  console.log('ATodo rendered')
+  // console.log('ATodo rendered')
 
   // const onMouseEnter = useCallback(() => {
   //   entered_reactflow.value = true

@@ -29,7 +29,7 @@ function create_atodo_window(): void {
   GLOBAL.ATODO_WINDOW.on('ready-to-show', () => {
     GLOBAL.ATODO_WINDOW!.show()
     // open devtools
-    GLOBAL.ATODO_WINDOW!.webContents.openDevTools()
+    if (is.dev) GLOBAL.ATODO_WINDOW!.webContents.openDevTools()
   })
 
   GLOBAL.ATODO_WINDOW.webContents.setWindowOpenHandler((details) => {

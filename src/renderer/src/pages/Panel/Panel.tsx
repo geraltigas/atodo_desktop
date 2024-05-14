@@ -12,24 +12,24 @@ import { HeadBar } from '../../components/HeadBar/HeadBar'
 import { now_doing_task_signal, TaskSidebar } from '../../components/TaskSidebar/TaskSidebar'
 import { TaskDetail } from '../../components/TaskDetail/TaskDetail'
 import {
-  day_signal,
   timer_signal,
   work_time_record_control_signal,
   WorkControl
 } from '../../components/WorkControl/WorkControl'
 import {
-  get_now_doing_task, get_now_is_work_time,
-  get_today_work_start,
+  get_now_doing_task,
+  get_now_is_work_time,
   get_work_time,
   now_doing_task_t,
-  today_work_start_t, work_time_t
+  work_time_t
 } from '../../api/app_state_api'
 import { boolean_response } from '../../api/database_api'
+import { AlertBar } from '../../components/AlertBar/AlertBar'
+import panel_events from '../../events/panel_events'
 
-export const update_work_control_and_task_detail = (work_time: work_time_t, today_work_start: today_work_start_t, now_doing_task: now_doing_task_t, now_is_work_time: boolean_response) => {
+export const update_work_control_and_task_detail = (work_time: work_time_t, now_doing_task: now_doing_task_t, now_is_work_time: boolean_response) => {
   batch(() => {
     timer_signal.value = work_time.work_time
-    day_signal.value = today_work_start.today_work_start
     now_doing_task_signal.value = now_doing_task.now_doing_task
     work_time_record_control_signal.value = now_is_work_time.status
     schedule_signal.value.tasks.forEach((task) => {
@@ -65,19 +65,13 @@ export const update_work_control_and_task_detail = (work_time: work_time_t, toda
 export const init_panel_data = () => {
   let p_schedule = get_schedule()
   let p_work_time = get_work_time()
-  let p_today_work_start = get_today_work_start()
   let p_now_doing_task = get_now_doing_task()
   let p_now_is_work_time = get_now_is_work_time()
 
-  Promise.all([p_schedule, p_work_time, p_today_work_start, p_now_doing_task, p_now_is_work_time]).then(([schedule, work_time, today_work_start, now_doing_task, now_is_work_time]) => {
+  Promise.all([p_schedule, p_work_time, p_now_doing_task, p_now_is_work_time]).then(([schedule, work_time, now_doing_task, now_is_work_time]) => {
     batch(() => {
-      console.log('schedule', schedule)
-      console.log('work_time', work_time)
-      console.log('today_work_start', today_work_start)
-      console.log('now_doing_task', now_doing_task)
-      console.log('now_is_work_time', now_is_work_time)
       schedule_signal.value = schedule
-      update_work_control_and_task_detail(work_time, today_work_start, now_doing_task, now_is_work_time)
+      update_work_control_and_task_detail(work_time, now_doing_task, now_is_work_time)
       data_loading.value = false
     })
   })
@@ -110,6 +104,9 @@ const init_schedule: schedule_t = {
 export const schedule_signal: Signal<schedule_t> = signal<schedule_t>(init_schedule)
 
 export const Panel = () => {
+
+  panel_events()
+
   return (
     <div className={styles.PanelPage}>
       <HeadBar />
@@ -118,6 +115,7 @@ export const Panel = () => {
         <TaskDetail />
       </div>
       <WorkControl />
+      <AlertBar />
     </div>
   )
 }

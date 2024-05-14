@@ -17,7 +17,7 @@ export const init_flow_data = () => {
   let promise1 = init_show_stack_data()
   let promise2 = init_show_graph_data()
   Promise.all([promise1, promise2]).then(() => {
-    console.log('Flow data init')
+    // console.log('Flow data init')
     data_loading.value = false
   }).catch((err) => {
     show_alert_error(err)
@@ -36,7 +36,7 @@ export default function Flow() {
   let onMouseEnter = useOnMouseEnter()
   let onMouseLeave = useOnMouseLeave()
 
-  console.log('Flow rendered')
+  // console.log('Flow rendered')
 
   const create_task = useCallback((data: CreateTaskFormData) => {
     // deadline from string to unix timestamp

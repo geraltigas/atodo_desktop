@@ -44,3 +44,7 @@ export const get_detailed_task = async (id: number) : Promise<task_detailed> => 
 export const set_detailed_task = async (task: task_detailed) : Promise<boolean_response> => {
   return axios_.post('/task/set_detailed_task', { ...task })
 }
+
+export const complete_task = async (id: number) : Promise<boolean_response> => {
+  return axios_.post('/task/complete_task', { id })
+}

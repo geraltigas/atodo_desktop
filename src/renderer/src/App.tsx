@@ -13,7 +13,7 @@ export enum Page {
   Panel
 }
 
-export const route = signal(Page.Panel)
+export const route = signal(Page.ATodo)
 export const data_loading: Signal<boolean> = signal<boolean>(true)
 
 const init_app_data = (page: Page) => {
