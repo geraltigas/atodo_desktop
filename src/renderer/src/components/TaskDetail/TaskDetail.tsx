@@ -24,7 +24,7 @@ export const TaskDetail = () => {
 
   if (!selected_task_signal.value || !selected_task_signal.value.type) {
     return (
-      <Paper className={styles.TaskDetail} elevation={3}>
+      <Paper className={styles.TaskDetail} elevation={3} sx={{ borderRadius: 0 }}>
         <Box display="flex" justifyContent="center" alignItems="center" height="100%">
           <InfoIcon fontSize="large" color="disabled" />
         </Box>
@@ -53,7 +53,7 @@ export const TaskDetail = () => {
   const task = selected_task_signal.value[selected_task_signal.value.type];
 
   return (
-    <Paper className={styles.TaskDetail} elevation={3} sx={{ padding: 2 }}>
+    <Paper className={styles.TaskDetail} elevation={3} sx={{ padding: 2 , borderRadius: 0 }}>
       <Typography variant="h4" gutterBottom>{task!.name}</Typography>
       <List>
         <ListItem>
