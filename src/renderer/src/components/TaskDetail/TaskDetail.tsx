@@ -1,24 +1,28 @@
 import {
-  Paper,
-  Typography,
-  Chip,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
+  Box,
+  Button,
   Card,
   CardContent,
-  Box, Button
+  Chip,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Paper,
+  Typography
 } from '@mui/material'
-import EventNoteIcon from '@mui/icons-material/EventNote';
-import FlagIcon from '@mui/icons-material/Flag';
-import InfoIcon from '@mui/icons-material/Info';
+import EventNoteIcon from '@mui/icons-material/EventNote'
+import FlagIcon from '@mui/icons-material/Flag'
+import InfoIcon from '@mui/icons-material/Info'
+import EditIcon from '@mui/icons-material/Edit'
 import styles from './TaskDetail.module.css'
 import { selected_task_signal } from '../../pages/Panel/Panel'
 import { event_trigger_task_show_t, suspended_task_show_t } from '../../api/schedule_api'
 import { now_doing_task_signal, timestamp_to_string } from '../TaskSidebar/TaskSidebar'
 import { useCallback } from 'preact/compat'
-import { set_now_doing_task } from '../../api/app_state_api'
+import { set_now_doing_task, set_now_viewing_task } from '../../api/app_state_api'
+import { Page, route } from '../../App'
 
 export const TaskDetail = () => {
 
@@ -49,6 +53,12 @@ export const TaskDetail = () => {
       }
     }
   }, []);
+
+  const handleEditClick = () => {
+    set_now_viewing_task(selected_task_signal.value.todo!.id).then(() => {
+      route.value = Page.ATodo;
+    });
+  }
 
   const task = selected_task_signal.value[selected_task_signal.value.type];
 
@@ -111,7 +121,15 @@ export const TaskDetail = () => {
               </CardContent>
         </Card>
       )}
-      {selected_task_signal.value?.type === 'todo' && <Button className={now_doing_task_signal.value === selected_task_signal.value.todo!.id ? styles.RemoveDoingButton : styles.SetDoingButton} onClick={handleStartTask}>{now_doing_task_signal.value === selected_task_signal.value.todo!.id ? 'Undo' : 'Do'}</Button>}
+      {selected_task_signal.value?.type === 'todo' && (
+        <>
+          <Button className={now_doing_task_signal.value === selected_task_signal.value.todo!.id ? styles.RemoveDoingButton : styles.SetDoingButton} onClick={handleStartTask}>{now_doing_task_signal.value === selected_task_signal.value.todo!.id ? 'Undo' : 'Do'}</Button>
+          <IconButton onClick={handleEditClick} className={styles.EditButton}>
+            <EditIcon/>
+          </IconButton>
+        </>
+      )}
+
     </Paper>
   );
 }
