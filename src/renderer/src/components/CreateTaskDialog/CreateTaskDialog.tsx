@@ -8,64 +8,59 @@ import {
   Checkbox,
   FormControlLabel,
   Box,
-  Typography,
-} from '@mui/material';
-import { ChangeEvent } from 'react';
+  Typography
+} from '@mui/material'
+import { ChangeEvent } from 'react'
 import { signal, Signal } from '@preact/signals'
 import { is_inputting } from '../../pages/ATodo/ATodo'
 
 export interface CreateTaskFormData {
-  name: string;
-  goal: string;
-  deadline: string;
-  in_work_time: boolean;
+  name: string
+  goal: string
+  deadline: string
+  in_work_time: boolean
 }
 
 interface CreateTaskDialogProps {
-  open: boolean;
-  onClose: () => void;
-  onSubmit: (data: CreateTaskFormData) => void;
+  open: boolean
+  onClose: () => void
+  onSubmit: (data: CreateTaskFormData) => void
 }
 
-const form_data:Signal<CreateTaskFormData> = signal<CreateTaskFormData>({
+const form_data: Signal<CreateTaskFormData> = signal<CreateTaskFormData>({
   name: '',
   goal: '',
   deadline: '',
-  in_work_time: false,
+  in_work_time: false
 })
 
-export const CreateTaskDialog = ({
-  open,
-  onClose,
-  onSubmit,
-}:CreateTaskDialogProps) => {
-
-  is_inputting.value = open;
+export const CreateTaskDialog = ({ open, onClose, onSubmit }: CreateTaskDialogProps) => {
+  is_inputting.value = open
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    form_data.value = { ...form_data.value, [name]: value };
-  };
+    const { name, value } = e.target
+    form_data.value = { ...form_data.value, [name]: value }
+  }
 
   const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-    form_data.value = { ...form_data.value, [name]: checked };
-  };
+    const { name, checked } = e.target
+    form_data.value = { ...form_data.value, [name]: checked }
+  }
 
   const handleSubmit = () => {
     const formattedData = {
       ...form_data.value,
-      deadline: form_data.value.deadline ? form_data.value.deadline : '',
-    };
-    onSubmit(formattedData);
+      deadline: form_data.value.deadline ? form_data.value.deadline : ''
+    }
+    onSubmit(formattedData)
     form_data.value = {
       name: '',
       goal: '',
       deadline: '',
-      in_work_time: false,
-    };
-    onClose();
-  };
+      in_work_time: false
+    }
+    onClose()
+  }
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
@@ -131,5 +126,5 @@ export const CreateTaskDialog = ({
         </Button>
       </DialogActions>
     </Dialog>
-  );
-};
+  )
+}

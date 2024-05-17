@@ -25,7 +25,6 @@ import { set_now_doing_task, set_now_viewing_task } from '../../api/app_state_ap
 import { Page, route } from '../../App'
 
 export const TaskDetail = () => {
-
   if (!selected_task_signal.value || !selected_task_signal.value.type) {
     return (
       <Paper className={styles.TaskDetail} elevation={3} sx={{ borderRadius: 0 }}>
@@ -33,38 +32,54 @@ export const TaskDetail = () => {
           <InfoIcon fontSize="large" color="disabled" />
         </Box>
       </Paper>
-    );
+    )
   }
 
   const handleStartTask = useCallback(() => {
     if (now_doing_task_signal.value === -1) {
       set_now_doing_task(selected_task_signal.value.todo!.id).then(() => {
-        now_doing_task_signal.value = selected_task_signal.value.todo!.id;
-      });
+        now_doing_task_signal.value = selected_task_signal.value.todo!.id
+      })
     } else {
       if (now_doing_task_signal.value === selected_task_signal.value.todo!.id) {
         set_now_doing_task(-1).then(() => {
-          now_doing_task_signal.value = -1;
-        });
-      }else {
+          now_doing_task_signal.value = -1
+        })
+      } else {
         set_now_doing_task(selected_task_signal.value.todo!.id).then(() => {
-          now_doing_task_signal.value = selected_task_signal.value.todo!.id;
-        });
+          now_doing_task_signal.value = selected_task_signal.value.todo!.id
+        })
       }
     }
-  }, []);
+  }, [])
 
   const handleEditClick = () => {
-    set_now_viewing_task(selected_task_signal.value.todo!.id).then(() => {
-      route.value = Page.ATodo;
-    });
+    let id: number;
+    switch (selected_task_signal.value.type) {
+      case 'todo':
+        id = selected_task_signal.value.todo!.id
+        break
+      case 'event':
+        id = selected_task_signal.value.event!.id
+        break
+      case 'suspended':
+        id = selected_task_signal.value.suspended!.id
+        break
+      default:
+        throw new Error('Unknown task type')
+    }
+    set_now_viewing_task(id).then(() => {
+      route.value = Page.ATodo
+    })
   }
 
-  const task = selected_task_signal.value[selected_task_signal.value.type];
+  const task = selected_task_signal.value[selected_task_signal.value.type]
 
   return (
-    <Paper className={styles.TaskDetail} elevation={3} sx={{ padding: 2 , borderRadius: 0 }}>
-      <Typography variant="h4" gutterBottom>{task!.name}</Typography>
+    <Paper className={styles.TaskDetail} elevation={3} sx={{ padding: 2, borderRadius: 0 }}>
+      <Typography variant="h4" gutterBottom>
+        {task!.name}
+      </Typography>
       <List>
         <ListItem>
           <ListItemIcon>
@@ -89,23 +104,32 @@ export const TaskDetail = () => {
           <ListItemText primary={timestamp_to_string(task!.deadline)} />
         </ListItem>
       </List>
-      <Chip label={task!.in_work_time ? 'Work Time' : 'Off Work'} color={task!.in_work_time ? 'error' : 'success'} />
+      <Chip
+        label={task!.in_work_time ? 'Work Time' : 'Off Work'}
+        color={task!.in_work_time ? 'error' : 'success'}
+      />
       {selected_task_signal.value.type === 'suspended' && (
         <Card variant="outlined" sx={{ mt: 2 }}>
           <CardContent>
             <Typography variant="h6">Suspended</Typography>
-              <Box sx={{ margin: 2 }}>
-                <Typography variant="body2">Type: {(task as suspended_task_show_t).type}</Typography>
-                {selected_task_signal.value.suspended!.type === 'time' && (
-                  <Typography variant="body2">Time: {timestamp_to_string((task as suspended_task_show_t).time_info!.time)}</Typography>
-                )}
-                {selected_task_signal.value.suspended!.type === 'email' && (
-                  <>
-                    <Typography variant="body2">Email: {(task as suspended_task_show_t).email_info?.email}</Typography>
-                    <Typography variant="body2">Keywords: {(task as suspended_task_show_t).email_info?.keywords.join(', ')}</Typography>
-                  </>
-                )}
-              </Box>
+            <Box sx={{ margin: 2 }}>
+              <Typography variant="body2">Type: {(task as suspended_task_show_t).type}</Typography>
+              {selected_task_signal.value.suspended!.type === 'time' && (
+                <Typography variant="body2">
+                  Time: {timestamp_to_string((task as suspended_task_show_t).time_info!.time)}
+                </Typography>
+              )}
+              {selected_task_signal.value.suspended!.type === 'email' && (
+                <>
+                  <Typography variant="body2">
+                    Email: {(task as suspended_task_show_t).email_info?.email}
+                  </Typography>
+                  <Typography variant="body2">
+                    Keywords: {(task as suspended_task_show_t).email_info?.keywords.join(', ')}
+                  </Typography>
+                </>
+              )}
+            </Box>
           </CardContent>
         </Card>
       )}
@@ -115,21 +139,29 @@ export const TaskDetail = () => {
           <CardContent>
             <Typography variant="h6">Event</Typography>
             <Box sx={{ margin: 2 }}>
-              <Typography variant="body1">Name: {(task as event_trigger_task_show_t).event_name}</Typography>
-              <Typography variant="body1">Description: {(task as event_trigger_task_show_t).event_description}</Typography>
+              <Typography variant="body1">
+                Name: {(task as event_trigger_task_show_t).event_name}
+              </Typography>
+              <Typography variant="body1">
+                Description: {(task as event_trigger_task_show_t).event_description}
+              </Typography>
             </Box>
-              </CardContent>
+          </CardContent>
         </Card>
       )}
-      {selected_task_signal.value?.type === 'todo' && (
-        <>
-          <Button className={now_doing_task_signal.value === selected_task_signal.value.todo!.id ? styles.RemoveDoingButton : styles.SetDoingButton} onClick={handleStartTask}>{now_doing_task_signal.value === selected_task_signal.value.todo!.id ? 'Undo' : 'Do'}</Button>
-          <IconButton onClick={handleEditClick} className={styles.EditButton}>
-            <EditIcon/>
-          </IconButton>
-        </>
-      )}
-
+      {selected_task_signal.value?.type === 'todo' && <Button
+            className={
+              now_doing_task_signal.value === selected_task_signal.value.todo!.id
+                ? styles.RemoveDoingButton
+                : styles.SetDoingButton
+            }
+            onClick={handleStartTask}
+          >
+            {now_doing_task_signal.value === selected_task_signal.value.todo!.id ? 'Undo' : 'Do'}
+          </Button>}
+      <IconButton onClick={handleEditClick} className={styles.EditButton}>
+        <EditIcon />
+      </IconButton>
     </Paper>
-  );
+  )
 }

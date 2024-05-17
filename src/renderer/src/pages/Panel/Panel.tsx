@@ -27,7 +27,11 @@ import { boolean_response } from '../../api/database_api'
 import { AlertBar } from '../../components/AlertBar/AlertBar'
 import panel_events from '../../events/panel_events'
 
-export const update_work_control_and_task_detail = (work_time: work_time_t, now_doing_task: now_doing_task_t, now_is_work_time: boolean_response) => {
+export const update_work_control_and_task_detail = (
+  work_time: work_time_t,
+  now_doing_task: now_doing_task_t,
+  now_is_work_time: boolean_response
+) => {
   batch(() => {
     timer_signal.value = work_time.work_time
     now_doing_task_signal.value = now_doing_task.now_doing_task
@@ -68,13 +72,15 @@ export const init_panel_data = () => {
   let p_now_doing_task = get_now_doing_task()
   let p_now_is_work_time = get_now_is_work_time()
 
-  Promise.all([p_schedule, p_work_time, p_now_doing_task, p_now_is_work_time]).then(([schedule, work_time, now_doing_task, now_is_work_time]) => {
-    batch(() => {
-      schedule_signal.value = schedule
-      update_work_control_and_task_detail(work_time, now_doing_task, now_is_work_time)
-      data_loading.value = false
-    })
-  })
+  Promise.all([p_schedule, p_work_time, p_now_doing_task, p_now_is_work_time]).then(
+    ([schedule, work_time, now_doing_task, now_is_work_time]) => {
+      batch(() => {
+        schedule_signal.value = schedule
+        update_work_control_and_task_detail(work_time, now_doing_task, now_is_work_time)
+        data_loading.value = false
+      })
+    }
+  )
 
   // then((schedule) => {
   //   batch(() => {
@@ -104,7 +110,6 @@ const init_schedule: schedule_t = {
 export const schedule_signal: Signal<schedule_t> = signal<schedule_t>(init_schedule)
 
 export const Panel = () => {
-
   panel_events()
 
   return (

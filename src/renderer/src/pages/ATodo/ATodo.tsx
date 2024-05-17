@@ -26,9 +26,10 @@ export default function ATodo() {
   // const nowSelected = useAtomValue(nowSelectedAtom)
 
   return (
-    <div className={styles.Window}
-         // onMouseEnter={onMouseEnter}
-         // onMouseLeave={onMouseLeave}
+    <div
+      className={styles.Window}
+      // onMouseEnter={onMouseEnter}
+      // onMouseLeave={onMouseLeave}
     >
       <div className={styles.AToDo}>
         {/*<FatherNodeBoard />*/}

@@ -3,7 +3,7 @@ export type show_stack = {
   show_stack: string[]
 }
 
-export const get_show_stack = async () : Promise<show_stack> => {
+export const get_show_stack = async (): Promise<show_stack> => {
   return axios_.post('/task_show/get_show_stack', {})
 }
 
@@ -30,6 +30,6 @@ export type show_data = {
   node_connected_to_end: string[]
 }
 
-export const get_show_data = async () : Promise<show_data> => {
+export const get_show_data = async (): Promise<show_data> => {
   return axios_.post('/task_show/get_show_data', {})
 }

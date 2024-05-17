@@ -1,4 +1,11 @@
-import { applyNodeChanges, Background, BackgroundVariant, Controls, Position, ReactFlow } from 'reactflow'
+import {
+  applyNodeChanges,
+  Background,
+  BackgroundVariant,
+  Controls,
+  Position,
+  ReactFlow
+} from 'reactflow'
 import { useOnConnect, useOnEdgeClick, useOnNodeClick } from '../../events/atodo_events'
 import { useEffect } from 'preact/compat'
 import StartNode from '../Nodes/StartNode/StartNode'
@@ -112,84 +119,84 @@ const edgeTypes = {
 }
 
 export const update_show_graph_with_show_data = (show_data: show_data) => {
-    let _show_nodes: Node[] = []
-    let _show_edges: Edge[] = []
-    if (show_data.nodes.length <= 0 ) {
-      _show_edges.push(edges_init[0])
+  let _show_nodes: Node[] = []
+  let _show_edges: Edge[] = []
+  if (show_data.nodes.length <= 0) {
+    _show_edges.push(edges_init[0])
+  }
+  let avg_y = 0
+  let max_x = 0
+  let temp_nodes = show_data.nodes.map((node) => {
+    avg_y += node.position.y
+    if (node.position.x > max_x) {
+      max_x = node.position.x
     }
-    let avg_y = 0
-    let max_x = 0
-    let temp_nodes = show_data.nodes.map((node) => {
-      avg_y += node.position.y
-      if (node.position.x > max_x) {
-        max_x = node.position.x
-      }
-      return {
-        id: node.id,
-        position: {
-          x: node.position.x,
-          y: node.position.y
-        },
-        type: 'task' as 'task',
-        draggable: true,
-        selectable: true,
-        data: {
-          name: node.name,
-          id: node.id,
-        }
-      }
-    })
-    avg_y /= show_data.nodes.length
-    _show_nodes.push(...temp_nodes)
-    _show_nodes.push(origin_node)
-    _show_nodes.push({
-      ...end_node,
+    return {
+      id: node.id,
       position: {
-        // if NaN then set to 0
-        x: isNaN(max_x) ? 100 : (max_x + 100),
-        y: isNaN(avg_y) ? 0 : avg_y
+        x: node.position.x,
+        y: node.position.y
       },
-    })
-    _show_nodes.push(start_node)
-    nodes.value = _show_nodes
-    let temp_edges = show_data.edges.map((edge) => {
-      return {
-        id: `${edge.source}-${edge.target}`,
-        source: edge.source,
-        target: edge.target,
-        sourceHandle: 'task-node-source',
-        targetHandle: 'task-node-target',
-        type: 'default_e',
-        selected: false
+      type: 'task' as 'task',
+      draggable: true,
+      selectable: true,
+      data: {
+        name: node.name,
+        id: node.id
       }
+    }
+  })
+  avg_y /= show_data.nodes.length
+  _show_nodes.push(...temp_nodes)
+  _show_nodes.push(origin_node)
+  _show_nodes.push({
+    ...end_node,
+    position: {
+      // if NaN then set to 0
+      x: isNaN(max_x) ? 100 : max_x + 100,
+      y: isNaN(avg_y) ? 0 : avg_y
+    }
+  })
+  _show_nodes.push(start_node)
+  nodes.value = _show_nodes
+  let temp_edges = show_data.edges.map((edge) => {
+    return {
+      id: `${edge.source}-${edge.target}`,
+      source: edge.source,
+      target: edge.target,
+      sourceHandle: 'task-node-source',
+      targetHandle: 'task-node-target',
+      type: 'default_e',
+      selected: false
+    }
+  })
+  _show_edges.push(...temp_edges)
+  show_data.node_connected_to_end.forEach((node_id) => {
+    _show_edges.push({
+      id: `${node_id}-end`,
+      source: node_id,
+      target: 'end',
+      sourceHandle: 'task-node-source',
+      targetHandle: 'end-node-target',
+      type: 'default_e',
+      selected: false
     })
-    _show_edges.push(...temp_edges)
-    show_data.node_connected_to_end.forEach((node_id) => {
-      _show_edges.push({
-        id: `${node_id}-end`,
-        source: node_id,
-        target: 'end',
-        sourceHandle: 'task-node-source',
-        targetHandle: 'end-node-target',
-        type: 'default_e',
-        selected: false
-      })
+  })
+  show_data.node_connected_to_start.forEach((node_id) => {
+    _show_edges.push({
+      id: `start-${node_id}`,
+      source: 'start',
+      target: node_id,
+      sourceHandle: 'start-node-source',
+      targetHandle: 'task-node-target',
+      type: 'default_e',
+      selected: false
     })
-    show_data.node_connected_to_start.forEach((node_id) => {
-      _show_edges.push({
-        id: `start-${node_id}`,
-        source: 'start',
-        target: node_id,
-        sourceHandle: 'start-node-source',
-        targetHandle: 'task-node-target',
-        type: 'default_e',
-        selected: false
-      })
-    })
-    edges.value = _show_edges
+  })
+  edges.value = _show_edges
 }
 
-export const  init_show_graph_data = async () => {
+export const init_show_graph_data = async () => {
   return get_show_data().then((res) => {
     update_show_graph_with_show_data(res)
   })
@@ -213,7 +220,12 @@ export const ShowGraph = () => {
       onNodesChange={(changes) => {
         nodes.value = applyNodeChanges(changes, nodes.value) as Node[]
         changes.forEach((value) => {
-          if (value.type === 'position' && value.dragging && value.id !== 'start' && value.id !== 'end') {
+          if (
+            value.type === 'position' &&
+            value.dragging &&
+            value.id !== 'start' &&
+            value.id !== 'end'
+          ) {
             position_map.set(value.id, { x: value.position!.x, y: value.position!.y })
             is_modified.value = true
           }

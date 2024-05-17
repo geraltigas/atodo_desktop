@@ -20,9 +20,14 @@ const init_database = async () => {
   console.log('Database file path: ', file_path.path)
 }
 
-init_database().then((_r) => {
-  render(<App />, document.getElementById('root')!)
-}).catch((_err) => {
-  window_control_api.show_notification("Unable to connect to the service", "Please check service status and try again.")
-  window_control_api.set_close()
-})
+init_database()
+  .then((_r) => {
+    render(<App />, document.getElementById('root')!)
+  })
+  .catch((_err) => {
+    window_control_api.show_notification(
+      'Unable to connect to the service',
+      'Please check service status and try again.'
+    )
+    window_control_api.set_close()
+  })

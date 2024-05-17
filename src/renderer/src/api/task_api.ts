@@ -27,24 +27,33 @@ export type task_detailed = {
     email: string
     keywords: string[]
   }
+  task_constraint: {
+    dependency_constraint: string
+    subtask_constraint: string
+  }
 }
 
-export const add_task_default = async (name: string, goal: string, deadline: number, in_work_time: boolean) : Promise<boolean_response> => {
+export const add_task_default = async (
+  name: string,
+  goal: string,
+  deadline: number,
+  in_work_time: boolean
+): Promise<boolean_response> => {
   return axios_.post('/task/add_task_default', { name, goal, deadline, in_work_time })
 }
 
-export const eliminate_task = async (id: number) : Promise<boolean_response> => {
+export const eliminate_task = async (id: number): Promise<boolean_response> => {
   return axios_.post('/task/eliminate_task', { id })
 }
 
-export const get_detailed_task = async (id: number) : Promise<task_detailed> => {
+export const get_detailed_task = async (id: number): Promise<task_detailed> => {
   return axios_.post('/task/get_detailed_task', { id })
 }
 
-export const set_detailed_task = async (task: task_detailed) : Promise<boolean_response> => {
+export const set_detailed_task = async (task: task_detailed): Promise<boolean_response> => {
   return axios_.post('/task/set_detailed_task', { ...task })
 }
 
-export const complete_task = async (id: number) : Promise<boolean_response> => {
+export const complete_task = async (id: number): Promise<boolean_response> => {
   return axios_.post('/task/complete_task', { id })
 }

@@ -3,7 +3,6 @@ import { HeadBar } from '../../components/HeadBar/HeadBar'
 import { AlertBar } from '../../components/AlertBar/AlertBar'
 
 export const Loading = () => {
-
   return (
     <div className={styles.loading}>
       <HeadBar />

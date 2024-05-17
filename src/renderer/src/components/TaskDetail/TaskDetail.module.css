@@ -31,18 +31,17 @@
 }
 
 .SetDoingButton {
-  margin-left: 20px!important;
+  margin-left: 20px !important;
   background-color: rgba(0, 128, 0, 0.5) !important;
-  color: white!important;
+  color: white !important;
 }
 
 .RemoveDoingButton {
-  margin-left: 20px!important;
+  margin-left: 20px !important;
   background-color: rgba(128, 0, 0, 0.5) !important;
-  color: white!important;
+  color: white !important;
 }
 
 .EditButton {
-  margin-left: 5px!important;
+  margin-left: 5px !important;
 }
-
