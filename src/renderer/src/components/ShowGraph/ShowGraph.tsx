@@ -142,7 +142,8 @@ export const update_show_graph_with_show_data = (show_data: show_data) => {
       selectable: true,
       data: {
         name: node.name,
-        id: node.id
+        id: node.id,
+        status: node.status,
       }
     }
   })
@@ -199,6 +200,7 @@ export const update_show_graph_with_show_data = (show_data: show_data) => {
 export const init_show_graph_data = async () => {
   return get_show_data().then((res) => {
     update_show_graph_with_show_data(res)
+    console.log(res)
   })
 }
 

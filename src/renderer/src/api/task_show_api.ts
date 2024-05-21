@@ -15,7 +15,8 @@ export type position = {
 export type show_node = {
   id: string
   name: string
-  position: position
+  position: position,
+  status: string
 }
 
 export type show_edge = {

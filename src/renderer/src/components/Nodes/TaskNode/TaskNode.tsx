@@ -12,20 +12,14 @@ const TaskNode = ({ data }) => {
   }
 
   switch (data.status) {
-    case 'created':
-      classNames.push(styles.TaskNodeCreated)
+    case 'todo':
+      classNames.push(styles.TaskNodeTodo)
       break
     case 'done':
       classNames.push(styles.TaskNodeDone)
       break
-    case 'in_progress':
-      classNames.push(styles.TaskNodeInProgress)
-      break
     case 'suspended':
       classNames.push(styles.TaskNodeSuspended)
-      break
-    case 'paused':
-      classNames.push(styles.TaskNodePaused)
       break
     default:
       classNames.push(styles.TaskNodeCreated)

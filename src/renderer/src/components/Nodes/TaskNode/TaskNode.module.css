@@ -4,11 +4,9 @@
   --task-node-size-width: 40px;
   --task-node-padding: 8px;
   --start-border-radius: 5px;
-  --task-node-background-color-created: #555555;
+  --task-node-background-color-todo: #555555;
   --task-node-background-color-done: #35732e;
-  --task-node-background-color-in-progress: #00ffe9;
-  --task-node-background-color-suspended: #ffb8b8;
-  --task-node-background-color-paused: #ff0000;
+  --task-node-background-color-suspended: #ff0000;
   --task-node-handle-background-color: #e4e4e4;
   --task-node-handle-hover-background-color: #a5a5a5;
   --task-node-color: #ffffff;
@@ -48,8 +46,8 @@
 }
 
 /*noinspection CssUnusedSymbol*/
-.TaskNodeCreated {
-  background-color: var(--task-node-background-color-created);
+.TaskNodeTodo {
+  background-color: var(--task-node-background-color-todo);
 }
 
 /*noinspection CssUnusedSymbol*/
@@ -58,18 +56,8 @@
 }
 
 /*noinspection CssUnusedSymbol*/
-.TaskNodeInProgress {
-  background-color: var(--task-node-background-color-in-progress);
-}
-
-/*noinspection CssUnusedSymbol*/
 .TaskNodeSuspended {
   background-color: var(--task-node-background-color-suspended);
-}
-
-/*noinspection CssUnusedSymbol*/
-.TaskNodePaused {
-  background-color: var(--task-node-background-color-paused);
 }
 
 /*noinspection CssUnusedSymbol*/
