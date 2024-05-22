@@ -277,7 +277,6 @@ export const EditTaskDialog = ({ open, onClose, onSubmit }: EditTaskDialogProps)
             >
               {[
                 { label: 'To Do', value: TaskStatus.todo },
-                { label: 'In Progress', value: TaskStatus.in_progress },
                 { label: 'Suspended', value: TaskStatus.suspended },
                 { label: 'Done', value: TaskStatus.done }
               ].map((status) => (
@@ -291,7 +290,8 @@ export const EditTaskDialog = ({ open, onClose, onSubmit }: EditTaskDialogProps)
             </RadioGroup>
           </FormControl>
           {form_data.value.status === TaskStatus.suspended && (
-            <FormControl component="fieldset">
+            <>
+                          <FormControl component="fieldset">
               <FormLabel component="legend">Suspended Task Type</FormLabel>
               <RadioGroup
                 name="suspended_task_type"
@@ -312,8 +312,7 @@ export const EditTaskDialog = ({ open, onClose, onSubmit }: EditTaskDialogProps)
                 ))}
               </RadioGroup>
             </FormControl>
-          )}
-          {form_data.value.suspended_task_type.includes(SuspendedTaskType.time) && (
+              {form_data.value.suspended_task_type.includes(SuspendedTaskType.time) && (
             <TextField
               margin="dense"
               name="resume_time"
@@ -349,6 +348,8 @@ export const EditTaskDialog = ({ open, onClose, onSubmit }: EditTaskDialogProps)
                 onChange={handleKeywordsChange}
                 helperText="Enter keywords separated by commas"
               />
+            </>
+          )}
             </>
           )}
           <FormControl component="fieldset">

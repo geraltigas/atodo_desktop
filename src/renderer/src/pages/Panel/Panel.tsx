@@ -109,6 +109,37 @@ const init_schedule: schedule_t = {
 }
 export const schedule_signal: Signal<schedule_t> = signal<schedule_t>(init_schedule)
 
+export const schedule_preprocess = (schedule: schedule_t):task_show_t[] => {
+  let tasks:task_show_t[];
+  if (work_time_record_control_signal.value) {
+    // rank in work time to the top
+    let in_work_time:task_show_t[] = []
+    let off_work:task_show_t[] = []
+    schedule.tasks.forEach((task) => {
+      if (task.in_work_time) {
+        in_work_time.push(task)
+      } else {
+        off_work.push(task)
+      }
+    })
+    tasks = in_work_time.concat(off_work)
+  }else {
+    // rank in work time to the bottom
+    let in_work_time:task_show_t[] = []
+    let off_work:task_show_t[] = []
+    schedule.tasks.forEach((task) => {
+      if (task.in_work_time) {
+        in_work_time.push(task)
+      } else {
+        off_work.push(task)
+      }
+    })
+    tasks = off_work.concat(in_work_time)
+  }
+
+  return tasks
+}
+
 export const Panel = () => {
   panel_events()
 

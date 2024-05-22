@@ -1,7 +1,7 @@
 import { List, ListItem, ListItemText, Typography } from '@mui/material'
-import { schedule_signal, selected_task_signal, selected_task_t } from '../../pages/Panel/Panel'
+import { schedule_preprocess, schedule_signal, selected_task_signal, selected_task_t } from '../../pages/Panel/Panel'
 import styles from './TaskSidebar.module.css'
-import { signal } from '@preact/signals'
+import { computed, signal } from '@preact/signals'
 
 export const now_doing_task_signal = signal<number>(-1)
 
@@ -22,12 +22,17 @@ export const TaskSidebar = () => {
     }
   }
 
+  // use compute signal
+  let task_signal = computed(() => {
+    return schedule_preprocess(schedule_signal.value)
+  })
+
   return (
     <List className={styles.taskSidebar}>
       <Typography variant="h6" className={styles.sectionHeader}>
         Todo
       </Typography>
-      {schedule_signal.value.tasks.map((task) => (
+      {task_signal.value.map((task) => (
         <ListItem
           key={task.id}
           onClick={() => handleTaskClick({ type: 'todo', todo: task })}
