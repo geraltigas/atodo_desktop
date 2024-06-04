@@ -8,5 +8,5 @@ export type task_ui = {
 }
 
 export const add_task_uis = async (task_uis: task_ui[]): Promise<boolean_response> => {
-  return axios_.post('/task_ui/add_task_uis', { task_uis })
+  return axios_.post('/task/update_task_ui', { task_uis })
 }

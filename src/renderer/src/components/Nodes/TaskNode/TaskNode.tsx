@@ -1,6 +1,7 @@
 import { Handle, Position } from 'reactflow'
 import styles from './TaskNode.module.css'
 import { now_selected, Node } from '../../ShowGraph/ShowGraph'
+import { TaskStatus } from '../../EditTaskDialog/EditTaskDialog'
 
 const TaskNode = ({ data }) => {
   const classNames = [styles.TaskNode]
@@ -12,13 +13,13 @@ const TaskNode = ({ data }) => {
   }
 
   switch (data.status) {
-    case 'todo':
+    case TaskStatus.todo:
       classNames.push(styles.TaskNodeTodo)
       break
-    case 'done':
+    case TaskStatus.done:
       classNames.push(styles.TaskNodeDone)
       break
-    case 'suspended':
+    case TaskStatus.suspended:
       classNames.push(styles.TaskNodeSuspended)
       break
     default:

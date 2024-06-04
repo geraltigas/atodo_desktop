@@ -24,8 +24,7 @@ export type suspended_task_show_t = {
   deadline: number
   in_work_time: boolean
   type: string
-  time_info?: suspended_time_info_t
-  email_info?: suspended_email_info_t
+  info?: suspended_time_info_t | suspended_email_info_t
 }
 
 export type event_trigger_task_show_t = {

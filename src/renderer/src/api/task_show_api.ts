@@ -1,6 +1,6 @@
 import { axios_ } from './axios'
 export type show_stack = {
-  show_stack: string[]
+  stack: string[]
 }
 
 export const get_show_stack = async (): Promise<show_stack> => {

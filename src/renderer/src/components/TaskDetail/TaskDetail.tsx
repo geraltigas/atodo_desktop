@@ -18,7 +18,12 @@ import InfoIcon from '@mui/icons-material/Info'
 import EditIcon from '@mui/icons-material/Edit'
 import styles from './TaskDetail.module.css'
 import { selected_task_signal } from '../../pages/Panel/Panel'
-import { event_trigger_task_show_t, suspended_task_show_t } from '../../api/schedule_api'
+import {
+  event_trigger_task_show_t,
+  suspended_email_info_t,
+  suspended_task_show_t,
+  suspended_time_info_t
+} from '../../api/schedule_api'
 import { now_doing_task_signal, timestamp_to_string } from '../TaskSidebar/TaskSidebar'
 import { useCallback } from 'preact/compat'
 import { set_now_doing_task, set_now_viewing_task } from '../../api/app_state_api'
@@ -116,16 +121,16 @@ export const TaskDetail = () => {
               <Typography variant="body2">Type: {(task as suspended_task_show_t).type}</Typography>
               {selected_task_signal.value.suspended!.type === 'time' && (
                 <Typography variant="body2">
-                  Time: {timestamp_to_string((task as suspended_task_show_t).time_info!.time)}
+                  Time: {timestamp_to_string(((task as suspended_task_show_t).info! as suspended_time_info_t).time)}
                 </Typography>
               )}
               {selected_task_signal.value.suspended!.type === 'email' && (
                 <>
                   <Typography variant="body2">
-                    Email: {(task as suspended_task_show_t).email_info?.email}
+                    Email: {((task as suspended_task_show_t).info! as suspended_email_info_t).email}
                   </Typography>
                   <Typography variant="body2">
-                    Keywords: {(task as suspended_task_show_t).email_info?.keywords.join(', ')}
+                    Keywords: {((task as suspended_task_show_t).info! as suspended_email_info_t).keywords.join(', ')}
                   </Typography>
                 </>
               )}

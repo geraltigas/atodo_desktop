@@ -64,10 +64,10 @@ export default function Flow() {
   const set_task_detail = useCallback((data: Task) => {
     let task: task_detailed = {
       task: {
-        task_id: Number(data.id),
+        id: Number(data.id),
         name: data.name,
         goal: data.goal,
-        deadline: new Date(data.deadline).getTime().toString(),
+        deadline: new Date(data.deadline).getTime(),
         in_work_time: data.in_work_time,
         status: data.status
       },

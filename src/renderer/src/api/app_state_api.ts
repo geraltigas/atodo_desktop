@@ -10,7 +10,7 @@ export type now_doing_task_t = {
 }
 
 export const set_now_viewing_task = async (now_viewing_task: number): Promise<boolean_response> => {
-  return axios_.post('/app_state/set_now_viewing_task', { now_viewing_task })
+  return axios_.post('/app_state/set_now_viewing_task', { id: now_viewing_task })
 }
 
 export const back_to_parent_task = async (): Promise<boolean_response> => {

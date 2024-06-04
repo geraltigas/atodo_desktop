@@ -9,7 +9,7 @@ const task_stack: Signal<string[]> = signal<string[]>(task_stack_init)
 
 export const init_show_stack_data = async () => {
   return get_show_stack().then((res) => {
-    task_stack.value = res.show_stack
+    task_stack.value = res.stack
   })
 }
 

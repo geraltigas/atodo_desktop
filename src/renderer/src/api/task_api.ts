@@ -3,10 +3,10 @@ import { axios_ } from './axios'
 
 export type task_detailed = {
   task: {
-    task_id: number
+    id: number
     name: string
     goal: string
-    deadline: string
+    deadline: number
     in_work_time: boolean
     status: string
   }

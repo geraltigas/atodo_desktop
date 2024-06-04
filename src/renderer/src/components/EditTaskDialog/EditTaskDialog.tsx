@@ -46,24 +46,22 @@ export interface Task {
 }
 
 export enum TaskAfterEffectType {
-  periodic = 'periodic'
+  periodic = 'Periodic'
 }
 
 export enum TaskStatus {
-  todo = 'todo',
-  in_progress = 'in_progress',
-  paused = 'paused',
-  suspended = 'suspended',
-  done = 'done'
+  todo = 'Todo',
+  suspended = 'Suspended',
+  done = 'Done'
 }
 
 export enum SuspendedTaskType {
-  time = 'time',
-  email = 'email'
+  time = 'Time',
+  email = 'Email'
 }
 
 export enum TaskTriggerType {
-  event = 'event'
+  event = 'Event'
 }
 
 interface EditTaskDialogProps {

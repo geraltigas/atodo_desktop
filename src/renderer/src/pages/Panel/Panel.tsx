@@ -74,6 +74,7 @@ export const init_panel_data = () => {
 
   Promise.all([p_schedule, p_work_time, p_now_doing_task, p_now_is_work_time]).then(
     ([schedule, work_time, now_doing_task, now_is_work_time]) => {
+      console.log(schedule)
       batch(() => {
         schedule_signal.value = schedule
         update_work_control_and_task_detail(work_time, now_doing_task, now_is_work_time)
