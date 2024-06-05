@@ -22,7 +22,7 @@ export const set_work_time = async (work_time: number): Promise<boolean_response
 }
 
 export const set_now_doing_task = async (now_doing_task: number): Promise<boolean_response> => {
-  return axios_.post('/app_state/set_now_doing_task', { now_doing_task })
+  return axios_.post('/app_state/set_now_doing_task', { id: now_doing_task })
 }
 
 export const get_work_time = async (): Promise<work_time_t> => {
